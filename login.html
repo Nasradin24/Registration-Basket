@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - 28 (1) Login</title>
+    <link rel="stylesheet" href="./Css/login.css">
+</head>
+<body>
+  <div class="icon-container">
+    <i id="moon-icon" class="fa-regular fa-moon"></i>
+  </div>
+    <div class="icon-container">
+        <i class="fa-solid fa-moon"></i>
+    </div>
+    <div class="container">
+        <div class="title">Login</div>
+        <div class="content">
+          <form action="#" id="form">
+            <div class="user-details">
+              <div class="input-box">
+                <span class="details">Username</span>
+                <input type="text" placeholder="Enter your username" id="userName" required />
+              </div>
+              <div class="input-box position">
+                <span class="details">Password</span>
+                <input type="password" placeholder="Enter your password" id="password" required />
+                <span class="icon" onclick="togglePasswordVisibility('password', 'password-eye', 'password-eye-slash')">
+                  <i class="fa-solid fa-eye active password-eye"></i>
+                  <i class="fa-solid fa-eye-slash password-eye-slash"></i>
+                </span>
+              </div>
+            </div>
+            <div class="button">
+              <input type="submit" value="Login" />
+            </div>
+          </form>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/50c8d96e81.js" crossorigin="anonymous"></script>
+    <script src="./Javascript/login.js"></script>
+</body>
+</html>

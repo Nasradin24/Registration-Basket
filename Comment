@@ -1,0 +1,113 @@
+<!-- <a class="navbar-brand" href="#">Navbar</a> -->
+      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button> 
+-->
+
+function changeQuantity(index, change, btn) {
+  console.log(btn.parentElement.previousElementSibling)
+  // console.log(price);
+  if (!basketArr[index].quantity) {
+      basketArr[index].quantity = 1;
+  }
+  basketArr[index].quantity += change;
+  if (basketArr[index].quantity < 1) {
+      basketArr[index].quantity = 1;
+  }
+  let total = basketArr[index].quantity * basketArr[index].price;
+  btn.parentElement.previousElementSibling.innerHTML = 'Price: ' + total;
+  document.querySelector('.mx-2').innerHTML = basketArr[index].quantity;
+  localStorage.setItem('basketArr', JSON.stringify(basketArr))
+  // localStorage.setItem('basketArr', JSON.stringify(basketArr));
+  // displayBasketItems();
+}
+
+
+
+
+
+// Initialize or retrieve basketArr from localStorage
+let basketArr = JSON.parse(localStorage.getItem('basketArr')) || [];
+
+// Function to display basket items
+function displayBasketItems() {
+    const column = document.querySelector('.column');
+    const totalPriceElem = document.querySelector('.total-price');
+    column.innerHTML = '';
+
+    basketArr.forEach((item, index) => {
+        const totalPrice = (item.price * (item.quantity || 0)).toFixed(2); // Calculate total price for the item
+        column.innerHTML += `
+            <div class="col-md-12">
+                <div class="card my-3">
+                    <img src="${item.image}" class="card-img-top mt-3" alt="...">
+                    <div class="card-body">
+                        <h6 class="card-title">${item.title}</h6>
+                        <p class="card-text"> <span class="item-price" id="price-${index}">${totalPrice} ₼</span></p>
+                        <div class="quantity-controls">
+                            <button onclick="changeQuantity(${index}, -1)">-</button>
+                            <span class="mx-2" id="quantity-${index}">${item.quantity || 0}</span> <!-- Ensure quantity starts at 0 if not set -->
+                            <button onclick="changeQuantity(${index}, 1)">+</button>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(${index})">X</button>
+                    </div>
+                </div>
+            </div>`;
+    });
+
+    updateTotalPrice();
+}
+
+// Function to change quantity of an item
+function changeQuantity(index, change) {
+    const item = basketArr[index];
+    item.quantity = (item.quantity || 0) + change; // Ensure quantity starts at 0 if not set
+
+    if (item.quantity < 0) {
+        item.quantity = 0; // Ensure quantity doesn't go below 0
+    }
+
+    localStorage.setItem('basketArr', JSON.stringify(basketArr));
+    updateQuantityDisplay(index);
+    updatePriceDisplay(index);
+    updateTotalPrice();
+}
+
+// Function to update quantity display
+function updateQuantityDisplay(index) {
+    const quantitySpan = document.getElementById(`quantity-${index}`);
+    quantitySpan.textContent = basketArr[index].quantity;
+}
+
+// Function to update price display
+function updatePriceDisplay(index) {
+    const totalPrice = (basketArr[index].price * (basketArr[index].quantity || 0)).toFixed(2);
+    const priceSpan = document.getElementById(`price-${index}`);
+    priceSpan.textContent = `Price: ${totalPrice} ₼`;
+}
+
+// Function to remove an item from the basket
+function removeItem(index) {
+    basketArr.splice(index, 1);
+    localStorage.setItem('basketArr', JSON.stringify(basketArr));
+    displayBasketItems();
+}
+
+// Function to update total price
+function updateTotalPrice() {
+    const totalPriceElem = document.querySelector('.total-price');
+    const total = basketArr.reduce((sum, item) => sum + item.price * (item.quantity || 0), 0); // Ensure quantity starts at 0 if not set
+    totalPriceElem.textContent = `Total: ${total.toFixed(2)} ₼`;
+}
+
+// Function to handle page refresh or user logout
+window.addEventListener('beforeunload', function() {
+    // Reset quantities to 0 before leaving the page
+    basketArr.forEach(item => {
+        item.quantity = 0;
+    });
+    localStorage.setItem('basketArr', JSON.stringify(basketArr));
+});
+
+// Initialize basket items and display on page load
+displayBasketItems();

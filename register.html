@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register 28 - 1 (Register)</title>
+    <link rel="stylesheet" href="./Css/register.css" />
+</head>
+<body>
+  <div class="icon-container">
+    <i id="moon-icon" class="fa-regular fa-moon"></i>
+  </div>
+  <div class="container">
+      <div class="title">Registration</div>
+      <div class="content">
+        <form id="form">
+          <div class="user-details">
+            <div class="input-box">
+              <span class="details">Full Name</span>
+              <input type="text" placeholder="Enter your name" id="fullName" required />
+              <p class="error" id="errorFullName">Zehmet olmasa adinizi daxil edin</p>
+            </div>
+            <div class="input-box">
+              <span class="details">Username</span>
+              <input type="text" placeholder="Enter your username" id="userName" required />
+            </div>
+            <div class="input-box">
+              <span class="details">Email</span>
+              <input type="text" placeholder="Enter your email" id="email" required />
+            </div>
+            <div class="input-box">
+              <span class="details">Phone Number</span>
+              <input type="text" placeholder="Enter your number" id="phoneNum" required />
+            </div>
+            <div class="input-box position">
+              <span class="details">Password</span>
+              <input type="password" placeholder="Enter your password" id="password" required />
+              <span class="icon" onclick="togglePasswordVisibility('password', 'password-eye', 'password-eye-slash')">
+                <i class="fa-solid fa-eye active password-eye"></i>
+                <i class="fa-solid fa-eye-slash password-eye-slash"></i>
+              </span>
+            </div>
+            <div class="input-box position">
+              <span class="details">Confirm Password</span>
+              <input type="password" placeholder="Confirm your password" id="confirmPassword" required />
+              <span class="icon" onclick="togglePasswordVisibility('confirmPassword', 'confirm-eye', 'confirm-eye-slash')">
+                <i class="fa-solid fa-eye active confirm-eye"></i>
+                <i class="fa-solid fa-eye-slash confirm-eye-slash"></i>
+              </span>
+              <p class="error" id="errorConfirm">Zehmet olmasa parolu duzgun daxil edin</p>
+            </div>
+          </div>
+          <div class="gender-details">
+            <input type="radio" name="gender" value="male" id="dot-1" />
+            <input type="radio" name="gender" value="female" id="dot-2" />
+            <input type="radio" name="gender" value="other" id="dot-3" />
+            <span class="gender-title">Gender</span>
+            <div class="category">
+              <label for="dot-1">
+                <span class="dot one"></span>
+                <span class="gender">Male</span>
+              </label>
+              <label for="dot-2">
+                <span class="dot two"></span>
+                <span class="gender">Female</span>
+              </label>
+              <label for="dot-3">
+                <span class="dot three"></span>
+                <span class="gender">Prefer not to say</span>
+              </label>
+            </div>
+            <p class="error" id="errorGender">Zehmet olmasa bir gender secin</p>
+          </div>
+          <div class="button">
+            <input type="submit" value="Register" onsubmit="register(event)" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="https://kit.fontawesome.com/50c8d96e81.js" crossorigin="anonymous"></script>
+    <script src="./Javascript/register.js"></script>
+</body>
+</html>

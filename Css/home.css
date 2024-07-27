@@ -1,0 +1,37 @@
+.container-fluid{
+    margin: 0 auto;
+}
+.navbar{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+.container h1{
+    margin: 10px 10px;
+    text-align: center;
+}
+.card > img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin: auto;
+}
+.card{
+    height: 300px;
+}
+.card-title{
+    height: 70px;
+}
+.form-control{
+    display: inline !important;
+    width: min-content;
+}
+.collapse{
+    display: flex;
+    justify-content: center;
+}
+.cart-right {
+    margin-left: 10px;
+}
